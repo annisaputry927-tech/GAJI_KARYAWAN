@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Payroll Interaktif - PT Nusantara Velicious Boga</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animasi Makanan & Minuman Lucu Mengambang -->
+    <div class="food-animations">
+        <span class="floating-item" style="left: 8%; animation-duration: 12s;">🍔</span>
+        <span class="floating-item" style="left: 25%; animation-duration: 15s; animation-delay: 2s;">🍕</span>
+        <span class="floating-item" style="left: 50%; animation-duration: 13s; animation-delay: 1s;">🥤</span>
+        <span class="floating-item" style="left: 72%; animation-duration: 16s; animation-delay: 3s;">🍟</span>
+        <span class="floating-item" style="left: 88%; animation-duration: 14s; animation-delay: 2.5s;">🍩</span>
+    </div>
+
+    <!-- Navbar Biru Soft dengan Sistem Kunci (Locked Navbar) -->
+    <nav class="navbar">
+        <div class="nav-brand">NVB <span>Food Enterprise</span></div>
+        <div class="nav-menu">
+            <button class="nav-btn active" id="navAuth" onclick="switchPage('authPage')">🔐 Login & Registrasi</button>
+            <button class="nav-btn locked" id="navHome" onclick="switchPage('homePage')">🏠 Beranda & Iklan</button>
+            <button class="nav-btn locked" id="navCompany" onclick="switchPage('companyPage')">🏢 Profil PT & Maps</button>
+            <button class="nav-btn locked" id="navEmployee" onclick="switchPage('employeePage')">👥 Foto Karyawan</button>
+            <button class="nav-btn locked" id="navSalary" onclick="switchPage('salaryPage')">📊 Database & Grafik</button>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <!-- HALAMAN 1: REGISTRASI & LOGIN -->
+        <section id="authPage" class="page-section active">
+            <div class="auth-card animate-fade">
+                <h2>Portal Akses Karyawan</h2>
+                <div class="auth-tabs">
+                    <button id="tabReg" class="active" onclick="switchAuthMode('reg')">Registrasi</button>
+                    <button id="tabLogin" onclick="switchAuthMode('login')">Login</button>
+                </div>
+                
+                <!-- Form Registrasi -->
+                <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="regName" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Perusahaan</label>
+                        <input type="email" id="regEmail" placeholder="nama@nvbfood.co.id" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPass" placeholder="Buat password baru" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Daftar Akun (Lanjut ke Login)</button>
+                </form>
+
+                <!-- Form Login -->
+                <form id="loginForm" class="auth-form hidden" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Email Perusahaan</label>
+                        <input type="email" id="loginEmail" placeholder="nama@nvbfood.co.id" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPass" placeholder="Masukkan password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Masuk ke Sistem</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- HALAMAN 2: BERANDA & IKLAN PERUSAHAAN -->
+        <section id="homePage" class="page-section">
+            <div class="hero-banner animate-fade">
+                <h1 id="companyTitleBanner" contenteditable="true" title="Klik untuk mengedit">PT Nusantara Velicious Boga</h1>
+                <p>Inovasi Kuliner Lezat, Sehat, dan Berkualitas Ekspor untuk Keluarga Indonesia</p>
+                <div class="ad-card">
+                    <span class="badge-ad">IKLAN RESMI PERUSAHAAN</span>
+                    <h2 id="adTitle" contenteditable="true" title="Klik untuk mengedit">"Nikmati Kelezatan Autentik Nusantara dalam Setiap Gigitan Modern!"</h2>
+                    <p id="adDesc" contenteditable="true" title="Klik untuk mengedit">Produk makanan dan minuman higienis olahan terbaik kami siap menemani hari-hari Anda dengan cita rasa istimewa dan kandungan gizi tinggi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 3: INFORMASI PT & MAPS -->
+        <section id="companyPage" class="page-section">
+            <div class="card animate-fade" style="margin-bottom: 10px; background: #E8F1F5; border-color: #4A90E2;">
+                <p style="font-weight:600; color: #1E3557;">ℹ️ Catatan Interaktif: Anda dapat langsung **mengklik teks** pada tabel informasi perusahaan di bawah ini untuk mengubah data perusahaan, nama HRD, alamat, atau keterangan pajak secara langsung!</p>
+            </div>
+            <div class="grid-2">
+                <div class="card animate-fade">
+                    <h3>Informasi Perusahaan Makanan (Klik Teks untuk Edit)</h3>
+                    <ul class="info-list">
+                        <li><strong>Nama Perusahaan:</strong> <span contenteditable="true" id="infoName">PT Nusantara Velicious Boga (NVB Food)</span></li>
+                        <li><strong>Bidang Usaha:</strong> <span contenteditable="true" id="infoField">Industri Manufaktur Makanan & Minuman Olahan</span></li>
+                        <li><strong>Alamat Kantor & Pabrik:</strong> <span contenteditable="true" id="infoAddress">Jl. Gatot Subroto No. 88, Kawasan Industri Medan (KIM) Tahap II, Medan, Sumatera Utara</span></li>
+                        <li><strong>HRD Manager:</strong> <span contenteditable="true" id="infoHrd">Bpk. Rehan Pratama, S.Psi., M.M.</span></li>
+                        <li><strong>Waktu Gaji Spesifik:</strong> <span contenteditable="true" id="infoSchedule">Pencairan gaji rutin setiap tanggal 25 setiap bulan.</span></li>
+                        <li><strong>Keterangan Pajak (PPh):</strong> <span contenteditable="true" id="infoTax">Pemotongan PPh Pasal 21 sebesar 13% dari Gaji Bersih sesuai ketentuan pajak berlaku.</span></li>
+                    </ul>
+                </div>
+                <div class="card animate-fade">
+                    <h3>Peta Lokasi Perusahaan (Google Maps)</h3>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.9366479007277!2d98.650!3d3.590!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzUnMjQuMCJOIDk4wrAzOScwMC4wIkU!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" 
+                            width="100%" height="210" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 4: FOTO PROFIL KARYAWAN -->
+        <section id="employeePage" class="page-section">
+            <div class="card animate-fade">
+                <h3>Kelola Foto Profil Karyawan</h3>
+                <p style="margin-bottom: 12px; color: #555;">Masukkan tautan URL gambar baru pada kolom di bawah untuk mengganti foto profil karyawan secara instan:</p>
+                <div class="employee-grid" id="employeeProfileGrid"></div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 5: DATABASE GAJI & GRAFIK -->
+        <section id="salaryPage" class="page-section">
+            <div class="dashboard-header animate-fade">
+                <h2>Database Gaji Karyawan (Edit & Tekan Enter untuk Update Otomatis)</h2>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn-primary" style="padding: 6px 12px; margin-top:0;" onclick="addNewEmployee()">➕ Tambah Karyawan</button>
+                    <button class="btn-excel" onclick="exportToExcel()">📥 Ekspor ke Excel (.xls)</button>
+                </div>
+            </div>
+
+            <!-- Tabel Gaji Interaktif -->
+            <div class="card animate-fade table-wrapper">
+                <p style="margin-bottom: 8px; font-style: italic; color: #555;">💡 Petunjuk: Ubah nilai pada kolom **Masa Kerja** atau **Jumlah Anak**, lalu tekan tombol **Enter** (atau klik di luar sel) untuk langsung memperbarui Gaji Bersih dan PPh 13% secara instan!</p>
+                <table id="salaryTable">
+                    <thead>
+                        <tr>
+                            <th>Nama Karyawan</th>
+                            <th>Pendidikan</th>
+                            <th>Masa Kerja (Thn)</th>
+                            <th>Jumlah Anak</th>
+                            <th>Gaji Pokok</th>
+                            <th>Tunj. Kerja</th>
+                            <th>Tunj. Anak</th>
+                            <th>Premi (3%)</th>
+                            <th>Gaji Bersih</th>
+                            <th>PPh (13%)</th>
+                            <th>Waktu Gaji</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salaryTableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- Grafik Gaji Karyawan -->
+            <div class="card animate-fade">
+                <h3>Grafik Perbandingan Gaji Bersih Karyawan</h3>
+                <div class="chart-box" id="salaryChart"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
